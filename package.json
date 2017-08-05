@@ -1,0 +1,35 @@
+{
+  "name": "ecs-deadlines",
+  "version": "1.0.0",
+  "description": "website that lists the upcoming coursework deadlines for students at the University of Southampton Electronics and Computer Science department",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adimote/ecs-deadlines.git"
+  },
+  "keywords": [
+    "deadlines",
+    "ecs",
+    "southampton-university"
+  ],
+  "author": "Andrew Barrett-Sprot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Adimote/ecs-deadlines/issues"
+  },
+  "homepage": "https://github.com/Adimote/ecs-deadlines#readme"
+}
