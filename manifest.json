@@ -1,0 +1,7 @@
+{
+  "name": "ecs-deadlines",
+  "short_name": "ecs-deadlines",
+  "description": "Application that lists the upcoming coursework deadlines for students at the University of Southampton Electronics and Computer Science department",
+  "start_url": "/",
+  "display": "standalone"
+}
