@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" type="css" href="material.css">
+
+<dom-module id="deadlines-row">
+  <template>
+    <style>
+      @import material;
+      :host {
+        display: block;
+      }
+    </style>
+    <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css">
+    <div>
+      <section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large">[[cwk.title]]</h1>
+        <h2 class="mdc-card__subtitle">[[cwk.module]] - [[cwk.lecturer]]</h2>
+      </section>
+    </div>
+<section class="mdc-card__media"></section>
+  </template>
+  <script src="node_modules/material-components-web/dist/material-components-web.js"></script>
+  <script>
+  class DeadlinesRow extends Polymer.Element {
+    static get is() { return "deadlines-row"; }
+    static get properties() { return {
+        cwk: Object 
+    }}
+  }
+  customElements.define(DeadlinesRow.is, DeadlinesRow);
+  mdc.autoInit();
+  </script>
+</dom-module>

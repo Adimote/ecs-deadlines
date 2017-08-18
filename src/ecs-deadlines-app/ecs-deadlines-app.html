@@ -1,13 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="deadlines-row.html">
 
 <dom-module id="ecs-deadlines-app">
   <template>
-    <style>
+    <style include="deadlines-row">
       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <deadlines-row cwk="{{courseworks}}" title="A Cool Paper Handin"></deadlines-row>
   </template>
 
   <script>
@@ -15,18 +16,19 @@
      * @customElement
      * @polymer
      */
+
+    coursework = {"title": "long coursework", "lecturer": "dave"};
     class EcsDeadlinesApp extends Polymer.Element {
       static get is() { return 'ecs-deadlines-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'ecs-deadlines-app'
-          }
+          courseworks: {
+            type: Object,
+            value: coursework
+	  }
         };
       }
     }
-
     window.customElements.define(EcsDeadlinesApp.is, EcsDeadlinesApp);
   </script>
 </dom-module>
