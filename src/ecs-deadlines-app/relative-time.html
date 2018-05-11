@@ -1,0 +1,85 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="relative-time">
+  <template>
+    <div>{{text}}</div>
+  </template>
+  <script>
+    class RelativeTime extends Polymer.Element {
+      static get is() { return "relative-time"; }
+
+      getTimes(datetime) {
+        const diff_ms = new Date().getTime() - datetime.getTime();
+        let d = {};
+        d.datetime = datetime;
+        d.sec = Math.round(diff_ms / 1001);
+        d.min = Math.round(d.sec / 60);
+        d.hour = Math.round(d.min / 60);
+        d.day = Math.round(d.hour / 24);
+        d.month = Math.round(d.day / 30);
+        d.year = Math.round(d.month / 12);
+        return d;
+      }
+
+      formatRelative(d) {
+        d.sec = Math.abs(d.sec);
+        d.min = Math.abs(d.min);
+        d.hour = Math.abs(d.hour);
+        d.day = Math.abs(d.day);
+        d.month = Math.abs(d.month);
+        d.year = Math.abs(d.year);
+        const totsecs = 60;
+        const totmins = 60;
+        const tothours = 24;
+        const totdays = 30;
+        const totmonths = 12;
+        if (d.sec < totsecs*0.75) {
+          return sec + ' seconds';
+        } else if (d.sec < totsecs*1.5) {
+          return 'a minute';
+        } else if (d.min < totmins*0.75) {
+          return d.min + ' minutes';
+        } else if (d.min < totmins*1.5) {
+          return 'an hour';
+        } else if (d.hour < tothours*0.75) {
+          return d.hour + ' hours';
+        } else if (d.hour < tothours*1.5) {
+          return 'a day';
+        } else if (d.day < totdays*0.90) {
+          return d.day + ' days';
+        } else if (d.day < totdays*1.5) {
+          return 'a month';
+        } else if (d.month < totmonths*0.90) {
+          return d.month + ' months';
+        } else if (d.month < totmonths*1.5) {
+          return 'a year';
+        } else {
+          return d.year + ' years';
+        }
+      }
+
+      getHuman(datetime) {
+        const d = this.getTimes(datetime);
+        if (d.sec < 0) {
+          // If in future, use future tense
+          return 'in ' + this.formatRelative(d);
+        } else if (d.sec > 30) {
+          // If in past, use past tense
+          return this.formatRelative(d) + ' ago';
+        } else { // if 0 > d.sec > -30
+          return 'just now';
+        }
+      }
+
+      static get properties() { return {
+        datetime: Object,
+        text: {
+          type: String,
+          computed: 'getHuman(datetime)'
+        },
+      }}
+    }
+
+    customElements.define(RelativeTime.is, RelativeTime);
+  </script>
+</dom-module>
