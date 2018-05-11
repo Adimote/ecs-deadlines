@@ -1,32 +1,148 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" type="css" href="material.css">
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../../bower_components/polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="relative-time.html">
 
 <dom-module id="deadlines-row">
   <template>
     <style>
-      @import material;
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+      }
+
       :host {
         display: block;
       }
+      .deadline-header { @apply --paper-font-headline; }
+
+      .card-content {
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      .date {
+        float: left;
+        width: 4.2em;
+        box-sizing: border-box;
+	      text-align: center;
+        color: white;
+        background-color: #489bf4
+      }
+      .date-day {
+        font-weight: bold;
+        font-size:3em;
+        margin: 0px -3px -7px 0px;
+      }
+      .date-month-year {
+        font-size:1em;
+        font-weight: bold;
+        margin: 0px 0px 5px 0px;
+      }
+
+      .time {
+        float: left;
+        font-size:1em;
+	      text-align: center;
+        margin: 0px;
+        width: 4em;
+      }
+
+      .time-time {
+        margin: 0px;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      .time-relative {
+        margin: 0px;
+      }
+
+      .content {
+        float: right;
+        padding-left: 10px;
+      }
+
+      .content p {
+        margin: 0px;
+      }
     </style>
-    <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css">
-    <div>
-      <section class="mdc-card__primary">
-        <h1 class="mdc-card__title mdc-card__title--large">[[cwk.title]]</h1>
-        <h2 class="mdc-card__subtitle">[[cwk.module]] - [[cwk.lecturer]]</h2>
-      </section>
+    <div class="card-content">
+      <paper-card class="date">
+          <p class="date-day">[[dueDate]]</p>
+          <p class="date-month-year"><span class="date-month">[[dueMonth]]</span>
+          <span class="date-year">[[dueYear]]</span></p>
+      </paper-card>
+      <paper-card class="not-date">
+        <div class="time">
+          <p class="time-time">[[dueTime]]</p>
+          <relative-time class="time-relative" datetime=[[cwk.due]]></relative-time>
+        </div>
+        <div class="content">
+          <p>hi</p>
+          <div class="deadline-header">[[cwk.title]]</div>
+          <p>[[cwk.lecturer]]</p>
+        </div>
+      </paper-card>
     </div>
-<section class="mdc-card__media"></section>
   </template>
-  <script src="node_modules/material-components-web/dist/material-components-web.js"></script>
   <script>
   class DeadlinesRow extends Polymer.Element {
     static get is() { return "deadlines-row"; }
     static get properties() { return {
-        cwk: Object 
+      cwk: Object,
+      dueDate: {
+        type: String,
+        computed: 'dateFormat(cwk.due)'
+      },
+      dueMonth: {
+        type: String,
+        computed: 'monthFormat(cwk.due)'
+      },
+      dueTime: {
+        type: String,
+        computed: 'timeFormat(cwk.due)'
+      },
+      dueYear: {
+        type: String,
+        computed: 'yearFormat(cwk.due)'
+      }
     }}
+
+    timeFormat(datetime) {
+      const options = {
+        hour: "numeric", minute: "numeric",
+      };
+      return datetime.toLocaleTimeString("en-GB", options);
+    }
+
+    dateFormat(datetime) {
+      const options = {
+        day: "numeric"
+      };
+      return datetime.toLocaleDateString("en-GB", options);
+    }
+
+    monthFormat(datetime) {
+      const options = {
+        month: "short",
+      };
+      return datetime.toLocaleDateString("en-GB", options);
+    }
+
+    yearFormat(datetime) {
+      const options = {
+        year: "2-digit"
+      };
+      return datetime.toLocaleDateString("en-GB", options);
+    }
   }
   customElements.define(DeadlinesRow.is, DeadlinesRow);
-  mdc.autoInit();
   </script>
 </dom-module>

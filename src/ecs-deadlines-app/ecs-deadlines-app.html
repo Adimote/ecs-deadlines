@@ -1,14 +1,17 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="deadlines-row.html">
 
 <dom-module id="ecs-deadlines-app">
   <template>
-    <style include="deadlines-row">
+    <style>
       :host {
         display: block;
       }
     </style>
-    <deadlines-row cwk="{{courseworks}}" title="A Cool Paper Handin"></deadlines-row>
+    <template is="dom-repeat" items="[[courseworks]]">
+      <deadlines-row cwk="[[item]]"></deadlines-row>
+    </template>
   </template>
 
   <script>
@@ -17,17 +20,30 @@
      * @polymer
      */
 
-    coursework = {"title": "long coursework", "lecturer": "dave"};
     class EcsDeadlinesApp extends Polymer.Element {
-      static get is() { return 'ecs-deadlines-app'; }
+      static get is() { return 'ecs-deadlines-app'; };
       static get properties() {
         return {
           courseworks: {
-            type: Object,
-            value: coursework
-	  }
-        };
-      }
+            type: Array,
+            value: () => [
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2017,8,22,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2017,9,21,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2017,10,23,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2017,11,24,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2017,12,25,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,1,26,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,2,27,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,3,28,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,4,29,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,5,30,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,6,1,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2018,7,2,17,0)},
+              {title: 'coursework with a very very long name', lecturer: 'dave', due: new Date(2028,7,2,17,0)},
+            ]
+          }
+        }
+      };
     }
     window.customElements.define(EcsDeadlinesApp.is, EcsDeadlinesApp);
   </script>

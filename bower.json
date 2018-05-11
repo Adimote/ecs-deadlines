@@ -1,9 +1,13 @@
 {
   "name": "ecs-deadlines",
-  "description": "Application that lists the upcoming coursework deadlines for students at the University of Southampton Electronics and Computer Science department",
+  "description": "Application that lists the upcoming coursework deadlines for students",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1",
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.8",
+    "paper-card": "PolymerElements/paper-card#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
